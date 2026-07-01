@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>Mūsu Ģimenes Uzdevumi</title>
+
+<!-- PWA / iOS -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#5B86E5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Uzdevumi">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+
+<link rel="stylesheet" href="css/style.css">
+
+<!-- Firebase (tiek izmantots tikai tad, ja js/firebase-config.js satur īstu konfigurāciju) -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<!-- ====================== SĀKUMA IESTATĪŠANA ====================== -->
+<div id="screen-setup" class="screen hidden">
+  <div class="card setup-card">
+    <div class="logo">⭐</div>
+    <h1>Mūsu Ģimenes Uzdevumi</h1>
+    <p id="setup-mode-hint" class="muted"></p>
+
+    <div id="setup-new-family">
+      <button id="btn-create-family" class="btn btn-primary btn-lg">Izveidot jaunu ģimeni</button>
+      <p class="muted small">Spied šo TIKAI VIENU REIZI — pirmajā telefonā/ierīcē, kuru iestati. Pēc tam saņemsi ģimenes kodu, ko ievadīt pārējās ierīcēs.</p>
+    </div>
+
+    <div class="divider">vai</div>
+
+    <div id="setup-join-family">
+      <label for="input-family-code">Ievadi ģimenes kodu</label>
+      <input id="input-family-code" type="text" placeholder="piem. VASARA-4821" autocapitalize="characters">
+      <button id="btn-join-family" class="btn btn-secondary btn-lg">Pievienoties ģimenei</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== PROFILA IZVĒLE ====================== -->
+<div id="screen-profile" class="screen hidden">
+  <div class="card">
+    <div class="logo">👋</div>
+    <h1>Kas tu esi?</h1>
+    <div id="profile-list" class="profile-list"></div>
+    <button id="btn-open-parent-from-profile" class="btn btn-ghost">Es esmu vecāks</button>
+    <button id="btn-show-family-code" class="btn btn-ghost small-btn">Rādīt ģimenes kodu</button>
+  </div>
+</div>
+
+<!-- ====================== PIN EKRĀNS ====================== -->
+<div id="screen-pin" class="screen hidden">
+  <div class="card">
+    <div class="logo">🔒</div>
+    <h1 id="pin-title">Vecāku PIN</h1>
+    <p id="pin-subtitle" class="muted"></p>
+    <input id="input-pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" class="pin-input" placeholder="••••">
+    <div id="pin-confirm-wrap" class="hidden">
+      <input id="input-pin-confirm" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" class="pin-input" placeholder="atkārto PIN">
+    </div>
+    <p id="pin-error" class="error-text hidden"></p>
+    <button id="btn-pin-submit" class="btn btn-primary btn-lg">Apstiprināt</button>
+    <button id="btn-pin-cancel" class="btn btn-ghost">Atpakaļ</button>
+  </div>
+</div>
+
+<!-- ====================== GALVENĀ LIETOTNE ====================== -->
+<div id="app" class="hidden">
+  <header id="app-header">
+    <div class="header-left">
+      <span id="header-avatar" class="header-avatar"></span>
+      <div>
+        <div id="header-name" class="header-name"></div>
+        <div id="header-points" class="header-points">⭐ 0 punkti</div>
+      </div>
+    </div>
+    <button id="btn-switch-profile" class="icon-btn" title="Mainīt lietotāju">🔁</button>
+  </header>
+
+  <main id="app-main">
+    <section id="view-tasks" class="view"></section>
+    <section id="view-learning" class="view hidden"></section>
+    <section id="view-shop" class="view hidden"></section>
+    <section id="view-parent" class="view hidden"></section>
+  </main>
+
+  <nav id="app-nav">
+    <button class="nav-btn active" data-view="tasks"><span class="nav-icon">✅</span><span>Uzdevumi</span></button>
+    <button class="nav-btn" data-view="learning"><span class="nav-icon">🧠</span><span>Mācies</span></button>
+    <button class="nav-btn" data-view="shop"><span class="nav-icon">🛍️</span><span>Veikals</span></button>
+    <button class="nav-btn" data-view="parent"><span class="nav-icon">🔒</span><span>Vecākiem</span></button>
+  </nav>
+</div>
+
+<!-- ====================== VISPĀRĪGS MODĀLIS ====================== -->
+<div id="modal-backdrop" class="modal-backdrop hidden">
+  <div id="modal-content" class="modal-content"></div>
+</div>
+
+<!-- ====================== PAZIŅOJUMS (TOAST) ====================== -->
+<div id="toast" class="toast hidden"></div>
+
+<script src="js/firebase-config.js"></script>
+<script src="js/db.js"></script>
+<script src="js/tasks.js"></script>
+<script src="js/learning.js"></script>
+<script src="js/shop.js"></script>
+<script src="js/parent.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

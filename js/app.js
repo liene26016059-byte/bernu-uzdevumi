@@ -213,14 +213,14 @@ const App = {
       this.el("header-name").textContent = "Vecāku skats";
       this.el("header-points").textContent = "";
     }
-    this.el("btn-switch-profile").onclick = () => {
-      this.state.parentUnlocked = false;
-      localStorage.removeItem("activeProfile");
-      this.state.activeProfile = null;
-      this.screen("profile");
-      this.renderProfileScreen();
+   this.el("btn-switch-profile").onclick = () => {
+      this.requestParentPin(() => {
+        this.state.activeProfile = null;
+        localStorage.removeItem("activeProfile");
+        this.screen("profile");
+        this.renderProfileScreen();
+      });
     };
-  },
 
   wireNav() {
     document.querySelectorAll(".nav-btn").forEach((btn) => {

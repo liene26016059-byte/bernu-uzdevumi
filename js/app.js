@@ -221,6 +221,7 @@ const App = {
         this.renderProfileScreen();
       });
     };
+     },
 
   wireNav() {
     document.querySelectorAll(".nav-btn").forEach((btn) => {

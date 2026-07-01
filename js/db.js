@@ -119,6 +119,9 @@ const DB = (() => {
       familyCode = localStorage.getItem("familyCode");
       if (isFirebaseConfigured()) {
         mode = "firebase";
+        if (familyCode && familyCode.startsWith("LOCAL-")) {
+          familyCode = null;
+        }
         try {
           if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
           firestore = firebase.firestore();

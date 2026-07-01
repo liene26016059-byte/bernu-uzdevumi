@@ -14,10 +14,10 @@
 // ============================================================
 
 window.FIREBASE_CONFIG = {
-  apiKey: "IELIKT_SAVU_API_KEY",
-  authDomain: "IELIKT_SAVU.firebaseapp.com",
-  projectId: "IELIKT_SAVU_PROJECT_ID",
-  storageBucket: "IELIKT_SAVU.appspot.com",
-  messagingSenderId: "IELIKT_SAVU",
-  appId: "IELIKT_SAVU_APP_ID"
+  apiKey: "AIzaSyAHWH7ZGPsBXkkVPO7wbJGy0Z-fhMiklzA",
+  authDomain: "bernu-uzdevumi.firebaseapp.com",
+  projectId: "bernu-uzdevumi",
+  storageBucket: "bernu-uzdevumi.firebasestorage.app",
+  messagingSenderId: "306868175799",
+  appId: "1:306868175799:web:e094536f070f76f9545e32"
 };
